@@ -1,0 +1,23 @@
+
+{
+java:S3008"^Rename this field "PERMISSIONS_STORAGE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(±Ìä¯8™é˜º«.
+C
+java:S1170"!Make this final field static too.(ºë¾èøÿÿÿÿ8ˆÃ˜º«.
+c
+java:S1854!"ARemove this useless assignment to local variable "nextWallpaper".(Âƒ†–ûÿÿÿÿ8¨Î›º«.
+Y
+java:S1068"<Remove this unused "REQUEST_EXTERNAL_STORAGE" private field.(Å¶£¢8™é˜º«.
+T
+java:S1068"7Remove this unused "PERMISSIONS_STORAGE" private field.(±Ìä¯8ˆÃ˜º«.
+z
+java:S1104"XMake imgWallpaper a static final constant or non-public and provide accessors if needed.(Ñ£°Éþÿÿÿÿ8™é˜º«.
+T
+java:S1481!"2Remove this unused "nextWallpaper" local variable.(Âƒ†–ûÿÿÿÿ8žËžº«.
+Q
+java:S1444"/Make this "public static photoPick" field final(íÅÙÄûÿÿÿÿ8™é˜º«.
+^
+java:S1854""ARemove this useless assignment to local variable "prevWallpaper".(õ‚÷–8ØŒŸº«.
+w
+java:S1104"UMake photoPick a static final constant or non-public and provide accessors if needed.(íÅÙÄûÿÿÿÿ8™é˜º«.
+O
+java:S1481""2Remove this unused "prevWallpaper" local variable.(õ‚÷–8—¯Ÿº«.
