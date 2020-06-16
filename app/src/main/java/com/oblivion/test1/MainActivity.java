@@ -2,9 +2,11 @@ package com.oblivion.test1;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.Notification;
 import android.app.WallpaperManager;
 import android.content.Context;
 import android.content.Intent;
@@ -14,7 +16,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.PowerManager;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -26,17 +30,26 @@ import android.widget.ViewFlipper;
 
 import java.io.IOException;
 
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+
 public class MainActivity extends AppCompatActivity {
     final Context context = this;
     public ImageView imgWallpaper;
     public static final int RESULT_PRO_IMG=1;
     public static boolean photoPick = false;
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
+    public boolean isStarted = false;
     private static String[] PERMISSIONS_STORAGE = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
+    private static String[] PERMISSIONS_BATTERY = {
+            Manifest.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
+    };
     ViewFlipper viewFlipper;
+    private NotificationUtils mNotificationUtils;
+    public boolean changeNotif = false;
+    public int image = 0;
 
 
     @Override
@@ -44,12 +57,28 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        isStarted = true;
+        mNotificationUtils = new NotificationUtils(this);
+        NotificationCompat.Builder nb = mNotificationUtils.
+                getChannelNotification("Image" + image);
+
+        mNotificationUtils.getManager().notify(101, nb.build());
+
         // checking if the required permissions are granted, if not it asks
         verifyStoragePermissions(this);
         viewFlipper = (ViewFlipper)findViewById(R.id.viewFlipper);
-        Button nextWallpaper = (Button)findViewById(R.id.nextWallpaper);
-        Button prevWallpaper = (Button)findViewById(R.id.previousWallpaper);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            String packageName = context.getPackageName();
+            PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+            if (!pm.isIgnoringBatteryOptimizations(packageName)) {
+                Intent intent = new Intent();
+                intent.setAction(android.provider.Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
+                intent.setFlags(FLAG_ACTIVITY_NEW_TASK);
+                intent.setData(Uri.parse("package:" + packageName));
+                context.startActivity(intent);
+            }
+        }
     }
 
     @Override
@@ -62,10 +91,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void onNextWallpaperClick(View v) {
         viewFlipper.showNext();
+        image = viewFlipper.getDisplayedChild();
+        changeNotif(image);
     }
 
     public void onPrevWallpaperClick(View v) {
         viewFlipper.showPrevious();
+        image = viewFlipper.getDisplayedChild();
+        changeNotif(image);
     }
 
     /**
@@ -77,9 +110,10 @@ public class MainActivity extends AppCompatActivity {
      */
     public static void verifyStoragePermissions(Activity activity) {
         // Check if we have write permission
-        int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        int permission1 = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        int permission2 = ActivityCompat.checkSelfPermission(activity, Manifest.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
 
-        if (permission != PackageManager.PERMISSION_GRANTED) {
+        if (permission1 != PackageManager.PERMISSION_GRANTED) {
             // We don't have permission so prompt the user
             ActivityCompat.requestPermissions(
                     activity,
@@ -87,5 +121,19 @@ public class MainActivity extends AppCompatActivity {
                     REQUEST_EXTERNAL_STORAGE
             );
         }
+
+        if (permission2 != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(
+                    activity,
+                    PERMISSIONS_BATTERY,
+                    0
+            );
+        }
+    }
+
+    public void changeNotif(int image) {
+        NotificationCompat.Builder nb = mNotificationUtils.
+                getChannelNotification("Image" + image);
+        mNotificationUtils.getManager().notify(101, nb.build());
     }
 }
