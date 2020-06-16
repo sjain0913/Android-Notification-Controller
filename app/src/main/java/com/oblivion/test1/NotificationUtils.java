@@ -39,20 +39,17 @@ public class NotificationUtils extends ContextWrapper {
     }
 
     public NotificationCompat.Builder getChannelNotification(String image) {
-//        Intent intent = new Intent(this, MainActivity.class);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
-        Intent intent = getPackageManager().getLaunchIntentForPackage(getPackageName());
-        PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0,
-                intent,PendingIntent.FLAG_UPDATE_CURRENT);
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
+        final Intent notificationIntent = new Intent(this, MainActivity.class);
+        notificationIntent.setAction(Intent.ACTION_MAIN);
+        notificationIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+        notificationIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
+        return new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
                 .setContentTitle(image)
                 .setContentText("You are on " + image)
                 .setSmallIcon(android.R.drawable.stat_notify_more)
-                .setContentIntent(pendingIntent)
-                .setAutoCancel(true);
-
-        return builder;
+                .setContentIntent(pendingIntent);
     }
 
 }
