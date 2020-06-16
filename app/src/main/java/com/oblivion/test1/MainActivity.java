@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
     };
     ViewFlipper viewFlipper;
     private NotificationUtils mNotificationUtils;
-    public boolean changeNotif = false;
     public int image = 0;
 
 
@@ -67,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
         // checking if the required permissions are granted, if not it asks
         verifyStoragePermissions(this);
         viewFlipper = (ViewFlipper)findViewById(R.id.viewFlipper);
+        viewFlipper.setDisplayedChild(image);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             String packageName = context.getPackageName();
@@ -99,6 +99,18 @@ public class MainActivity extends AppCompatActivity {
         viewFlipper.showPrevious();
         image = viewFlipper.getDisplayedChild();
         changeNotif(image);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        image = viewFlipper.getDisplayedChild();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        viewFlipper.setDisplayedChild(image);
     }
 
     /**
