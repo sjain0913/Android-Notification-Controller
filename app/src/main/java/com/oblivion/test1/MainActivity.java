@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     ViewFlipper viewFlipper;
     private NotificationUtils mNotificationUtils;
     public int image = 0;
-
+    MainActivity instance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         isStarted = true;
+        instance = this;
         mNotificationUtils = new NotificationUtils(this);
         NotificationCompat.Builder nb = mNotificationUtils.
                 getChannelNotification("Image" + image);
@@ -147,5 +148,9 @@ public class MainActivity extends AppCompatActivity {
         NotificationCompat.Builder nb = mNotificationUtils.
                 getChannelNotification("Image" + image);
         mNotificationUtils.getManager().notify(101, nb.build());
+    }
+
+    public MainActivity getInstance() {
+        return instance;
     }
 }

@@ -45,11 +45,20 @@ public class NotificationUtils extends ContextWrapper {
         notificationIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
+
+        //This is the intent of PendingIntent
+        Intent intentAction = new Intent(this,MyBroadcastReceiver.class);
+
+        intentAction.putExtra("action","next");
+
+        PendingIntent nextIntent = PendingIntent.getBroadcast(this,1,intentAction,PendingIntent.FLAG_UPDATE_CURRENT);
         return new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
                 .setContentTitle(image)
                 .setContentText("You are on " + image)
-                .setSmallIcon(android.R.drawable.stat_notify_more)
-                .setContentIntent(pendingIntent);
+                .setSmallIcon(android.R.drawable.star_big_on)
+                .setContentIntent(pendingIntent)
+                .addAction(R.drawable.icon, "Next", nextIntent)
+                .setOngoing(true);
     }
 
 }
