@@ -8,15 +8,15 @@ import android.util.Log;
 public class MyBroadcastReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-
+        context.sendBroadcast(new Intent("NEXT"));
         String action=intent.getStringExtra("action");
         if(action.equals("next")){
-            performAction1();
+            performNext();
         }
     }
 
-    public void performAction1(){
-        Log.v("perform", "1");
+    public void performNext(){
+        Log.v("perform", "next");
 
     }
 

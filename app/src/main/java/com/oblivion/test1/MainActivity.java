@@ -8,8 +8,10 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.Notification;
 import android.app.WallpaperManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -34,9 +36,6 @@ import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 public class MainActivity extends AppCompatActivity {
     final Context context = this;
-    public ImageView imgWallpaper;
-    public static final int RESULT_PRO_IMG=1;
-    public static boolean photoPick = false;
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     public boolean isStarted = false;
     private static String[] PERMISSIONS_STORAGE = {
@@ -55,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        registerReceiver(broadcastReceiver, new IntentFilter("NEXT"));
         isStarted = true;
         instance = this;
         mNotificationUtils = new NotificationUtils(this);
@@ -82,6 +81,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            nextWallpaper();
+        }
+    };
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event){
         if (keyCode == KeyEvent.KEYCODE_MENU) {
@@ -91,6 +97,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onNextWallpaperClick(View v) {
+        nextWallpaper();
+    }
+
+    public void nextWallpaper() {
         viewFlipper.showNext();
         image = viewFlipper.getDisplayedChild();
         changeNotif(image);
@@ -113,6 +123,13 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         viewFlipper.setDisplayedChild(image);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(broadcastReceiver);
+    }
+
 
     /**
      * Checks if the app has permission to write to device storage
@@ -148,9 +165,5 @@ public class MainActivity extends AppCompatActivity {
         NotificationCompat.Builder nb = mNotificationUtils.
                 getChannelNotification("Image" + image);
         mNotificationUtils.getManager().notify(101, nb.build());
-    }
-
-    public MainActivity getInstance() {
-        return instance;
     }
 }
