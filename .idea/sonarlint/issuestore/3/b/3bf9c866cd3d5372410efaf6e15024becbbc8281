@@ -1,52 +1,44 @@
 
-Q
-java:S1128	"5Remove this unused import 'android.app.Notification'.(¸Ó†98¤âß«.
+P
+java:S1128"4Remove this unused import 'android.graphics.Bitmap'.(¾ì8Õòªã«.
+u
+java:S3252"WUse static access with "androidx.core.content.ContextCompat" for "checkSelfPermission".(İ¿éÎ8›Êğæ«.
+T
+java:S1128"2Remove this unused import 'android.widget.Button'.(²òıÿÿÿÿ8Õòªã«.
+n
+java:S11042"QMake image a static final constant or non-public and provide accessors if needed.(øäÖ„8ıÃùå«.
 U
 java:S1128
 "9Remove this unused import 'android.app.WallpaperManager'.(÷¡ï8ÓÒùº«.
-Q
-java:S1444'"/Make this "public static photoPick" field final(íÅÙÄûÿÿÿÿ8Õòªã«.
-z
-java:S1104%"XMake imgWallpaper a static final constant or non-public and provide accessors if needed.(Ñ£°Éşÿÿÿÿ8Õòªã«.
-w
-java:S1104'"UMake photoPick a static final constant or non-public and provide accessors if needed.(íÅÙÄûÿÿÿÿ8Õòªã«.
-w
-java:S1104)"UMake isStarted a static final constant or non-public and provide accessors if needed.(Ø™Ğåøÿÿÿÿ8Õòªã«.
-t
-java:S11043"WMake changeNotif a static final constant or non-public and provide accessors if needed.(ÇÓ¯§8Õòªã«.
-n
-java:S11044"QMake image a static final constant or non-public and provide accessors if needed.(øäÖ„8Õòªã«.
-]
-java:S1128";Remove this unused import 'android.graphics.BitmapFactory'.(âàºÍûÿÿÿÿ8Õòªã«.
-U
-java:S1128"8Remove this unused import 'android.provider.MediaStore'.(ãçšş8Õòªã«.
-S
-java:S1128"1Remove this unused import 'android.widget.Toast'.(©›ïÍúÿÿÿÿ8Õòªã«.
-T
-java:S1128"2Remove this unused import 'android.widget.Button'.(²òıÿÿÿÿ8Õòªã«.
-Q
-java:S1128"4Remove this unused import 'android.graphics.Matrix'.(ÑÏ’8Õòªã«.
 O
-java:S1128"-Remove this unused import 'android.util.Log'.(Ô¦Ø²øÿÿÿÿ8Õòªã«.
-V
-java:S1128"4Remove this unused import 'android.database.Cursor'.(Ôäåúÿÿÿÿ8Õòªã«.
-R
-java:S1128"0Remove this unused import 'java.io.IOException'.(ªº»Úıÿÿÿÿ8Õòªã«.
-P
-java:S1128"4Remove this unused import 'android.graphics.Bitmap'.(¾ì8Õòªã«.
-{
-java:S3008*"^Rename this field "PERMISSIONS_STORAGE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(±Ìä¯8Õòªã«.
-z
-java:S3008."^Rename this field "PERMISSIONS_BATTERY" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(œÌö8Õòªã«.
-C
-java:S1170$"!Make this final field static too.(ºë¾èøÿÿÿÿ8Õòªã«.
-‘
-java:S1845†"nRename method "changeNotif" to prevent any misunderstanding/clash with field "changeNotif" defined on line 51.(½ı¼Âúÿÿÿÿ8Õòªã«.
-E
-java:S1172\"(Remove this unused method parameter "v".(™¸ùö8Õòªã«.
+java:S1128"-Remove this unused import 'android.util.Log'.(Ô¦Ø²øÿÿÿÿ8Õòªã«.
 J
-java:S1172b"(Remove this unused method parameter "v".(æŞù¦øÿÿÿÿ8Õòªã«.
-y
-java:S3252q"WUse static access with "androidx.core.content.ContextCompat" for "checkSelfPermission".(ÅÓéêÿÿÿÿÿ8Õòªã«.
-t
-java:S3252r"WUse static access with "androidx.core.content.ContextCompat" for "checkSelfPermission".(İ¿éÎ8Õòªã«.
+java:S1172m"(Remove this unused method parameter "v".(æŞù¦øÿÿÿÿ8›Êğæ«.
+]
+java:S1128";Remove this unused import 'android.graphics.BitmapFactory'.(âàºÍûÿÿÿÿ8Õòªã«.
+Q
+java:S1128"4Remove this unused import 'android.graphics.Matrix'.(ÑÏ’8Õòªã«.
+S
+java:S1128"1Remove this unused import 'android.widget.Toast'.(©›ïÍúÿÿÿÿ8Õòªã«.
+z
+java:S3252"WUse static access with "androidx.core.content.ContextCompat" for "checkSelfPermission".(ÅÓéêÿÿÿÿÿ8›Êğæ«.
+E
+java:S1172c"(Remove this unused method parameter "v".(™¸ùö8›Êğæ«.
+V
+java:S1128"4Remove this unused import 'android.database.Cursor'.(Ôäåúÿÿÿÿ8Õòªã«.
+C
+java:S1170&"!Make this final field static too.(ºë¾èøÿÿÿÿ8Õòªã«.
+R
+java:S1128!"0Remove this unused import 'java.io.IOException'.(ªº»Úıÿÿÿÿ8Õòªã«.
+w
+java:S1104("UMake isStarted a static final constant or non-public and provide accessors if needed.(Ø™Ğåøÿÿÿÿ8Õòªã«.
+W
+java:S1128"5Remove this unused import 'android.widget.ImageView'.(ú¯ëàüÿÿÿÿ8†°êæ«.
+{
+java:S3008)"^Rename this field "PERMISSIONS_STORAGE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(±Ìä¯8Õòªã«.
+z
+java:S3008-"^Rename this field "PERMISSIONS_BATTERY" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(œÌö8Õòªã«.
+Q
+java:S1128	"5Remove this unused import 'android.app.Notification'.(¸Ó†98‹òØå«.
+U
+java:S1128"8Remove this unused import 'android.provider.MediaStore'.(ãçšş8Õòªã«.
